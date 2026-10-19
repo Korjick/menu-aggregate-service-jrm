@@ -6,6 +6,8 @@ server:
     idle-timeout: 20s
 
 spring:
+  reactor:
+    context-propagation: auto
   application:
     name: menu-aggregate-service
   lifecycle:
@@ -58,14 +60,13 @@ management:
       exposure:
         include: "*"
   tracing:
-    enabled: true
     sampling:
       probability: 1.0
     propagation:
       type: b3
-  zipkin:
-    tracing:
-      endpoint: ${external.zipkin-endpoint}
+    export:
+      zipkin:
+        endpoint: ${external.zipkin-endpoint}
 
 resilience4j:
   retry:
